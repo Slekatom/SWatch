@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class Channel(models.Model):
     COUNTRIES = [
         ("ua", "Ukraine"),
@@ -27,6 +26,7 @@ class Video(models.Model):
     channel = models.ForeignKey(Channel, on_delete=models.CASCADE)
     upload_date = models.DateTimeField(auto_now_add=True)
     views = models.PositiveIntegerField(default=0)
+    path = models.FileField(upload_to="videos/", null=True, blank=True)
 
     def __str__(self):
         return f"Video: {self.title}, Channel: {self.channel.title}"
