@@ -15,6 +15,7 @@ class Channel(models.Model):
     followers = models.PositiveIntegerField(default=0)
     views = models.PositiveIntegerField(default=0)
     country = models.CharField(max_length=20, choices=COUNTRIES, default="404")
+    avatar = models.FileField(upload_to="avatars/", null=True, blank = True)
 
     def __str__(self):
         return f"Channel: {self.title}, Country: {self.country}"
@@ -27,6 +28,7 @@ class Video(models.Model):
     upload_date = models.DateTimeField(auto_now_add=True)
     views = models.PositiveIntegerField(default=0)
     path = models.FileField(upload_to="videos/", null=True, blank=True)
+    photo = models.FileField(upload_to="photos/", null = True, blank = True)
 
     def __str__(self):
         return f"Video: {self.title}, Channel: {self.channel.title}"

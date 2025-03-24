@@ -6,4 +6,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("jet/", include("jet.urls", namespace="jet")),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path("", include("full_videos.urls")),
+]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
