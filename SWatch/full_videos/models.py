@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models import DO_NOTHING
 from django.http import HttpResponse
 class Channel(models.Model):
     COUNTRIES = [
@@ -36,11 +37,18 @@ class Video(models.Model):
 
 class Following(models.Model):
     channel = models.ForeignKey(Channel, on_delete=models.DO_NOTHING)
-    user = models.ForeignKey(User, related_name='bookings', on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     date_followed = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"Followed from {self.date_followed} to {self.channel}"
+
+class View(models.Model):
+    video = models.ForeignKey(Video, on_delete=DO_NOTHING)
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+
+    def __str__(self):
+     return f"{self.user} viewed {self.video}"
 
 
 
