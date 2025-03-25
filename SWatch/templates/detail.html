@@ -47,18 +47,22 @@
             <p>{{ video.description }}</p>
 
             <div class="channel-info">
-                {% if video.channel.avatar %}
-                    <img src="{{ video.channel.avatar.url }}" class="channel-avatar" alt="Аватар">
-                {% endif %}
-                <div>
-                    <h5>{{ video.channel.title }}</h5>
-                    {% if request.session.follow_status %}
-                        <a href="{% url 'follow' video.channel.pk %}" class="btn btn-secondary btn-sm">Відписатися</a>
-                    {% else %}
-                        <a href="{% url 'follow' video.channel.pk %}" class="btn btn-danger btn-sm">Підписатися</a>
-                    {% endif %}
-                </div>
-            </div>
+    {% if video.channel.avatar %}
+        <img src="{{ video.channel.avatar.url }}" class="channel-avatar" alt="Аватар">
+    {% endif %}
+    <div>
+        <h5>{{ video.channel.title }}</h5>
+        {% if is_following %}
+            <!-- Если пользователь подписан -->
+            <a href="{% url 'follow' video.channel.pk %}" class="btn btn-secondary btn-sm">Відписатися</a>
+        {% else %}
+            <!-- Если пользователь не подписан -->
+            <a href="{% url 'follow' video.channel.pk %}" class="btn btn-danger btn-sm">Підписатися</a>
+        {% endif %}
+    </div>
+</div>
+
+</div>
         </div>
     </div>
 

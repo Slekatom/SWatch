@@ -12,10 +12,21 @@ class VideosListView(ListView):
     ordering = ["-upload_date"]
     paginate_by = 10
 
+
 class VideosDetailView(DetailView):
     model = Video
     template_name = "detail.html"
     context_object_name = "video"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        video = context['video']
+
+        is_following = Following.objects.filter(channel=video.channel, user=self.request.user).exists()
+
+        context['is_following'] = is_following
+
+        return context
 
 
 @login_required

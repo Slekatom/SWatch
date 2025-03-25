@@ -1,0 +1,15 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>{{ user.username }}'s Profile</h1>
+
+<h2>Videos from Channels You Follow</h2>
+{% for i in following_channels %}
+{{ i.title }}
+{% endfor %}
+
+</body>
+</html>

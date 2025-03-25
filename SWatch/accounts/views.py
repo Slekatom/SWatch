@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import LoginForm, RegisterForm
+from full_videos.models import Following
+
 
 def login_view(request):
     """Функція для обробки логіну користувача."""
@@ -41,8 +43,11 @@ def logout_view(request):
     return redirect('accounts:login')  # Маршрут для логіну
 
 
-def logout_view(request):
-    """Функція для обробки виходу з облікового запису."""
-    logout(request)
-    messages.success(request, 'Ви успішно вийшли.')
-    return redirect('accounts:login')  # Переконайтесь, що у вас є маршрут для логіну
+def profile_view(request):
+    if request.user.is_authenticated:
+        user = request.user
+        following_channels = Following.objects.filter(user=user)
+        channels = [follow.channel for follow in following_channels]
+        print(channels)
+
+        return render(request, 'accounts/profile.html', {'user': user, 'following_channels': channels})
