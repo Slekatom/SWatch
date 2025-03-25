@@ -1,5 +1,4 @@
 {% load static %}
-<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -46,6 +45,13 @@
     </style>
 </head>
 <body>
+<header>
+        <nav>
+            <a href="{% url 'accounts:login' %}">Логін</a> |
+            <a href="{% url 'accounts:register' %}">Реєстрація</a> |
+            <a href="{% url 'accounts:logout' %}">Вихід</a>
+        </nav>
+    </header>
     <div class="container mt-4">
         <h1 class="text-center mb-4">Видео</h1>
         <div class="row">
